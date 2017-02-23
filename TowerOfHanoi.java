@@ -1,6 +1,6 @@
 public class TowerOfHanoi{
   // Properties
-  private int numberOfDiscs;
+  public int numberOfDiscs;
   public int[][] towers;
   
   // Constructors
@@ -32,13 +32,18 @@ public class TowerOfHanoi{
 
   // Finds index of top of tower
   public int topDisc(int tower, int index) {
-    if (this.towers[index][0] > 0) { 
+    // if the tower is empty, return -1
+    if (index >= this.numberOfDiscs) {
+      return(-1);
+    }
+    // if we find the top disc, return its index
+    if (this.towers[index][tower] > 0) { 
       return(index);
     }
+    // otherwise, step down the tower looking for discs
     else {
-      topDisc(tower, index+1);
+      return topDisc(tower, index+1);
     }
-    return (index);
   }
   
   // polymorphic version of recursive topDisc method
@@ -48,10 +53,14 @@ public class TowerOfHanoi{
   }
   
   public static void main(String [ ] args) {
-    TowerOfHanoi tower = new TowerOfHanoi(4);
+    TowerOfHanoi tower = new TowerOfHanoi(5);
     tower.towers[0][0] = 0;
+    tower.towers[1][0] = 0;
+    tower.towers[2][1] = 1;
+    tower.towers[3][0] = 0;
     tower.print();
     
-    System.out.println(tower.topDisc(0));
+    System.out.println(tower.topDisc(1));
+    //tower.print();
   }
 }
