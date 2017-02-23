@@ -72,19 +72,24 @@ public class TowerOfHanoi{
     this.towers[topDiscOfSource][source] = 0;
   }
   
+  public void moveTower(int discs, int source, int spare, int goal){
+    if (discs == 1) {
+        moveDisc(source, goal);
+    }
+    else {
+        moveTower(discs - 1, source, goal, spare);
+        moveDisc(source, goal);
+        moveTower(discs - 1, spare, source, goal);
+    }
+  }
+  
+  
   public static void main(String [ ] args) {
     TowerOfHanoi tower = new TowerOfHanoi(4);
     tower.print();
-    tower.moveDisc(0,1);
+    tower.moveTower(4, 0, 2, 1);
     System.out.println();
     tower.print();
-    
-    tower.moveDisc(0,1);
-    tower.moveDisc(0,1);
-    tower.moveDisc(0,1);
-    System.out.println();
-    tower.print();
-    //System.out.println(tower.topDisc(1));
-    //tower.print();
+
   }
 }
