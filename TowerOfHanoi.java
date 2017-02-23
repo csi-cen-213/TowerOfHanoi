@@ -52,15 +52,39 @@ public class TowerOfHanoi{
     return this.topDisc(tower, 0);
   }
   
+  public void moveDisc(int source, int destination) {
+    // TODO: make sure responds properly to:
+    // moving from empty tower to other tower
+    // moving if user tries to put something on top
+    // of full tower
+    int topDiscOfSource = this.topDisc(source);
+    int topDiscOfDestination = topDisc(destination);
+    // if the destination tower is empty, put it on
+    // bottom
+    if (topDiscOfDestination < 0) {
+      this.towers[this.numberOfDiscs-1][destination] =
+        this.towers[topDiscOfSource][source];
+    }
+    else {
+      this.towers[topDisc(destination)-1][destination] =
+        this.towers[topDiscOfSource][source];
+    }
+    this.towers[topDiscOfSource][source] = 0;
+  }
+  
   public static void main(String [ ] args) {
-    TowerOfHanoi tower = new TowerOfHanoi(5);
-    tower.towers[0][0] = 0;
-    tower.towers[1][0] = 0;
-    tower.towers[2][1] = 1;
-    tower.towers[3][0] = 0;
+    TowerOfHanoi tower = new TowerOfHanoi(4);
+    tower.print();
+    tower.moveDisc(0,1);
+    System.out.println();
     tower.print();
     
-    System.out.println(tower.topDisc(1));
+    tower.moveDisc(0,1);
+    tower.moveDisc(0,1);
+    tower.moveDisc(0,1);
+    System.out.println();
+    tower.print();
+    //System.out.println(tower.topDisc(1));
     //tower.print();
   }
 }
